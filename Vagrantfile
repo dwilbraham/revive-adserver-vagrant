@@ -57,6 +57,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
   # View the documentation for the provider you're using for more
   # information on available options.
+  
+  # This shell provisioner installs librarian-puppet and runs it to install
+  # puppet modules. This has to be done before the puppet provisioning so that
+  # the modules are available when puppet tries to parse its manifests.
+  config.vm.provision :shell, :path => "shell/main.sh"
 
   # Enable provisioning with Puppet stand alone.  Puppet manifests
   # are contained in a directory path relative to this Vagrantfile.
@@ -77,8 +82,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # # }
   #
   config.vm.provision :puppet do |puppet|
-    puppet.manifests_path = "manifests"
-    puppet.manifest_file  = "default.pp"
+    puppet.manifests_path = "puppet/manifests"
+    puppet.manifest_file  = "main.pp"
   end
 
   # Enable provisioning with chef solo, specifying a cookbooks path, roles

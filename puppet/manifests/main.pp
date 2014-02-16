@@ -1,4 +1,3 @@
-import 'install.pp'
-import 'service.pp'
+include '::mysql::server'
 
-include install, service
+class { 'apache':  }

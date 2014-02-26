@@ -4,6 +4,7 @@ class install {
     'php',
     'php-mysql',
     'vim-enhanced',
+    'mod_ssl',
   ]
 
   package { $packages:

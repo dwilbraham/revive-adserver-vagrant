@@ -17,11 +17,22 @@ class revive {
   }
   
   exec { 'Move revive code':
-    command => "mv /root/revive-adserver-${revive_version} /var/www/html/revive",
-    creates => '/var/www/html/revive',
+    command => "mv /root/revive-adserver-${revive_version} /var/www/revive",
+    creates => '/var/www/revive',
     cwd     => '/root/',
     path    => '/bin',
     require => Exec['Unpack revive tar'],
   }
   
+  $files_to_chmod = [
+    '/var/www/revive/var',
+    '/var/www/revive/plugins',
+    '/var/www/revive/www/admin/plugins',
+    '/var/www/revive/www/images',
+  ]
+  file { $files_to_chmod:
+    ensure  => 'present',
+    mode    => 'a+w',
+    recurse => 'true',
+  }
 }

@@ -17,10 +17,20 @@ mysql::db { 'revivedb':
 
 include '::apache'
 include '::apache::mod::php'
+include '::apache::mod::ssl'
 
-#apache::vhost { 'revive.example.com':
-#  port    => '80',
-#  docroot => '/var/www/revive',
-#}
+apache::vhost { "${::ipaddress_eth1}_ssl":
+  servername => "${::ipaddress_eth1}",
+  port       => '443',
+  docroot    => '/var/www/revive',
+  ssl        => 'true',
+}
+apache::vhost { "${::ipaddress_eth1}_non-ssl":
+  servername      => "${::ipaddress_eth1}",
+  port            => '80',
+  docroot         => '/var/www/revive',
+  redirect_status => 'permanent',
+  redirect_dest   => "https://${::ipaddress_eth1}/",
+}
 
 include 'revive'

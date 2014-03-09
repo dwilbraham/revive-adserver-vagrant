@@ -23,7 +23,8 @@ apache::vhost { "${::ipaddress_eth1}_ssl":
   servername => "${::ipaddress_eth1}",
   port       => '443',
   docroot    => '/var/www/revive',
-  ssl        => 'true',
+  ssl        => true,
+  require => Exec['Move revive code'],
 }
 apache::vhost { "${::ipaddress_eth1}_non-ssl":
   servername      => "${::ipaddress_eth1}",
@@ -31,6 +32,7 @@ apache::vhost { "${::ipaddress_eth1}_non-ssl":
   docroot         => '/var/www/revive',
   redirect_status => 'permanent',
   redirect_dest   => "https://${::ipaddress_eth1}/",
+  require => Exec['Move revive code'],
 }
 
 include 'revive'

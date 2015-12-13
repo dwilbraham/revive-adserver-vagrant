@@ -1,5 +1,5 @@
 class revive {
-  $revive_version = '3.0.2'
+  $revive_version = '3.2.2'
 
   exec { 'Fetch revive tar':
     command => "wget http://download.revive-adserver.com/revive-adserver-${revive_version}.tar.gz",

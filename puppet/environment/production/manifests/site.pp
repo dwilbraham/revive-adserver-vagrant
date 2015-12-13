@@ -1,9 +1,6 @@
-import 'install.pp'
-import 'service.pp'
-import 'revive.pp'
-
 include 'install'
 include 'service'
+include 'revive'
 
 include '::mysql::server'
 #include '::mysql::server::account_security'
@@ -34,5 +31,3 @@ apache::vhost { "${::ipaddress_eth1}_non-ssl":
   redirect_dest   => "https://${::ipaddress_eth1}/",
   require => Exec['Move revive code'],
 }
-
-include 'revive'

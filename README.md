@@ -18,4 +18,14 @@ Start up your revive VM:
     git clone https://github.com/dwilbraham/revive-adserver-vagrant.git
     cd revive-adserver-vagrant
     vagrant up
-    
+
+Find the IP of the vagrant VM you have launched and browse to that IP (you should be redirected to the SSL version)
+
+Finish the setup process with the following default settings:
+
+    Database Name = revivedb
+    User          = revive
+    Password      = revive123
+    Hostname      = localhost
+
+The above defaults can be changed in ```puppet/environment/production/manifests/site.pp```
